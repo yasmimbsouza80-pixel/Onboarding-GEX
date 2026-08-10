@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#031a2a" />
     <meta name="robots" content="noindex, nofollow" />
+    <meta name="manual-version" content="2026-08-07-oficial-v3" />
     <title>Manual de Boas-vindas GEX</title>
     <style>
 :root {
@@ -164,7 +165,12 @@ button { color: inherit; }
   opacity: 0;
   transform: translateX(3%);
   transition: opacity 0.3s ease, transform 0.42s ease, visibility 0.42s;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 184, 244, 0.42) transparent;
+  scrollbar-gutter: stable;
   padding: var(--safe-top) 0 var(--safe-bottom);
   background:
     radial-gradient(circle at 92% 20%, rgba(19, 106, 247, 0.15), transparent 33%),
@@ -230,10 +236,11 @@ button { color: inherit; }
 .official-watermark {
   position: absolute;
   z-index: 0;
-  width: min(42vw, 560px);
+  width: min(38vw, 520px, calc(100dvh - var(--safe-top) - var(--safe-bottom) - 48px));
   aspect-ratio: 1;
-  right: 2.5%;
-  top: 18%;
+  right: clamp(18px, 3vw, 48px);
+  top: calc(var(--safe-top) + (100dvh - var(--safe-top) - var(--safe-bottom)) / 2);
+  transform: translateY(-50%);
   opacity: 0.14;
   filter: drop-shadow(0 0 60px rgba(19, 106, 247, 0.22));
 }
@@ -510,7 +517,10 @@ p { line-height: 1.55; }
 .statement-stack p { margin: 7px 0 0; color: var(--muted); }
 
 .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.culture-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.culture-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
 
 .value-card { padding: 28px; border-radius: 22px; }
 .value-card .value-number { margin-bottom: 28px; }
@@ -521,6 +531,72 @@ p { line-height: 1.55; }
   border-top: 1px solid var(--line-soft);
   color: var(--muted);
   font-size: 14px;
+}
+
+.culture-card {
+  --culture-accent: #00b8f4;
+  min-height: 200px;
+  padding: 24px 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--culture-accent) 20%, transparent), transparent 34%),
+    linear-gradient(145deg, rgba(9, 34, 67, 0.96), rgba(3, 14, 29, 0.92));
+  border-color: color-mix(in srgb, var(--culture-accent) 46%, transparent);
+}
+
+.culture-card:nth-child(2) { --culture-accent: #6d8dff; }
+.culture-card:nth-child(3) { --culture-accent: #ffb23f; }
+.culture-card:nth-child(4) { --culture-accent: #ff5f83; }
+
+.culture-card::before {
+  width: 92px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--culture-accent), transparent);
+}
+
+.culture-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.culture-icon {
+  width: 54px;
+  height: 54px;
+  flex: 0 0 54px;
+  display: grid;
+  place-items: center;
+  border: 1px solid color-mix(in srgb, var(--culture-accent) 58%, transparent);
+  border-radius: 17px;
+  background: color-mix(in srgb, var(--culture-accent) 14%, rgba(5, 19, 39, 0.92));
+  font-size: 29px;
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--culture-accent) 26%, transparent));
+}
+
+.culture-card .value-number {
+  margin: 0;
+  padding: 7px 10px;
+  border: 1px solid color-mix(in srgb, var(--culture-accent) 34%, transparent);
+  border-radius: 999px;
+  color: var(--culture-accent);
+  background: rgba(2, 10, 22, 0.48);
+}
+
+.culture-card h3 {
+  margin: 0;
+  font-size: clamp(22px, 2vw, 27px);
+  line-height: 1.12;
+}
+
+.culture-card p {
+  margin-top: 12px;
+  padding-top: 12px;
+  font-size: 16px;
+  line-height: 1.48;
 }
 
 .value-card .good::before { content: "✓ "; color: #27d8aa; font-weight: 900; }
@@ -1030,9 +1106,131 @@ p { line-height: 1.55; }
   .hero-text { font-size: clamp(20px, 2vw, 27px); }
   .identity-card { margin-top: 16px; }
   .cover-note { padding: 20px 22px; }
+
+  .eyebrow { margin-bottom: 10px; }
+  .lead { margin-bottom: 18px; }
+  .lead.compact { font-size: clamp(15px, 1.3vw, 18px); }
+
+  .cover-grid,
+  .split-layout,
+  .buddy-layout { gap: 46px; }
+
+  .chapter-grid,
+  .value-grid,
+  .area-grid,
+  .week-grid,
+  .month-flow,
+  .timeline,
+  .access-guide,
+  .check-grid { gap: 10px; }
+
+  .chapter-grid article,
+  .value-card,
+  .area-grid article,
+  .week-grid article,
+  .month-flow article,
+  .timeline article,
+  .access-guide article,
+  .check-grid article,
+  .support-note,
+  .calculation-card { padding: 17px 19px; }
+
+  .chapter-grid article { min-height: 170px; }
+  .chapter-grid span,
+  .value-card .value-number,
+  .week-grid span,
+  .month-flow article > span,
+  .timeline article > span { margin-bottom: 18px; }
+
+  .week-grid article { min-height: 190px; }
+  .month-flow article { min-height: 175px; }
+  .timeline article { min-height: 150px; }
+  .buddy-card { min-height: 290px; padding: 24px; }
+
+  .tool-list { gap: 8px; }
+  .tool-list article { padding: 12px 14px; }
+  .payment-list article { padding: 12px 16px; }
+  .payment-list p { font-size: 14px; line-height: 1.4; }
+
+  .benefit-list { gap: 6px; margin-top: 12px; }
+  .detailed-benefits li { min-height: 64px; padding: 9px 12px; }
+  .culture-card { min-height: 174px; padding: 17px 19px; }
+  .culture-card-top { margin-bottom: 11px; }
+  .culture-card .value-number { margin: 0; }
+  .culture-icon { width: 46px; height: 46px; flex-basis: 46px; font-size: 25px; }
+  .culture-card h3 { font-size: 21px; }
+  .culture-card p { margin-top: 9px; padding-top: 9px; font-size: 14px; }
+  .support-note a { margin-top: 14px; }
+  .invoice-note,
+  .callout { margin-top: 12px; }
 }
 
-@media (max-width: 900px) {
+/* Modo extra compacto para notebooks com altura útil muito pequena
+   ou com escala do Windows/navegador ampliada. */
+@media (min-width: 901px) and (max-height: 650px) {
+  :root { --safe-top: 56px; --safe-bottom: 46px; }
+
+  .topbar { padding: 0 26px; }
+  .brand { height: 48px; }
+  .brand-logo { width: 118px; }
+  .overview-button { padding: 8px 14px; }
+
+  .slide-inner {
+    width: min(1180px, calc(100% - 72px));
+    min-height: calc(100dvh - var(--safe-top) - var(--safe-bottom));
+    padding: 14px 0;
+  }
+
+  h1 { font-size: clamp(44px, 5.5vw, 66px); }
+  h2 { margin-bottom: 14px; font-size: clamp(32px, 3.7vw, 46px); }
+  h3 { margin-bottom: 6px; font-size: 18px; }
+  p { line-height: 1.4; }
+
+  .hero-text { font-size: clamp(17px, 1.7vw, 22px); }
+  .eyebrow { margin-bottom: 7px; }
+  .lead { margin-bottom: 12px; }
+
+  .chapter-grid article,
+  .value-card,
+  .area-grid article,
+  .week-grid article,
+  .month-flow article,
+  .timeline article,
+  .access-guide article,
+  .check-grid article,
+  .support-note,
+  .calculation-card { padding: 13px 15px; }
+
+  .chapter-grid article { min-height: 145px; }
+  .week-grid article { min-height: 155px; }
+  .month-flow article { min-height: 150px; }
+  .timeline article { min-height: 125px; }
+  .buddy-card { min-height: 245px; padding: 20px; }
+
+  .chapter-grid span,
+  .value-card .value-number,
+  .week-grid span,
+  .month-flow article > span,
+  .timeline article > span { margin-bottom: 12px; }
+
+  .timeline article > span { height: 34px; }
+  .mini-list { gap: 5px; margin-top: 10px; }
+  .mini-link { margin-top: 12px; }
+  .clean-list { gap: 6px; margin-top: 16px; }
+  .clean-list li { padding-top: 8px; padding-bottom: 8px; }
+
+  .payment-list article { padding: 9px 13px; }
+  .payment-list p { font-size: 13px; }
+  .detailed-benefits li { min-height: 56px; }
+  .culture-card { min-height: 150px; padding: 13px 15px; }
+  .culture-card-top { margin-bottom: 8px; }
+  .culture-card .value-number { margin: 0; padding: 5px 8px; }
+  .culture-icon { width: 40px; height: 40px; flex-basis: 40px; border-radius: 13px; font-size: 22px; }
+  .culture-card h3 { font-size: 19px; }
+  .culture-card p { margin-top: 7px; padding-top: 7px; font-size: 13px; line-height: 1.38; }
+}
+
+@media (max-width: 700px) {
   :root { --safe-top: 72px; --safe-bottom: 64px; }
 
   .topbar {
@@ -1050,7 +1248,13 @@ p { line-height: 1.55; }
 
   .slide { overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch; }
   .slide::after { width: 88vw; right: -46vw; top: 18%; opacity: 0.14; }
-  .official-watermark { width: 76vw; right: -28vw; top: 23%; opacity: 0.1; }
+  .official-watermark {
+    width: min(58vw, calc(100dvh - var(--safe-top) - var(--safe-bottom) - 36px));
+    right: 2%;
+    top: calc(var(--safe-top) + (100dvh - var(--safe-top) - var(--safe-bottom)) / 2);
+    transform: translateY(-50%);
+    opacity: 0.1;
+  }
 
   .slide-inner {
     width: min(100% - 36px, 700px);
@@ -1106,8 +1310,51 @@ p { line-height: 1.55; }
 
   .controls { padding: 0 18px; }
   .controls span { display: none; }
-  .controls p { max-width: 170px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .controls p {
+    max-width: 46vw;
+    overflow: visible;
+    white-space: nowrap;
+    text-overflow: clip;
+    font-size: clamp(8px, 2.4vw, 11px);
+  }
   .overview-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* Em notebooks, o conteúdo é centralizado e reduzido automaticamente pelo
+   JavaScript para permanecer inteiro entre o cabeçalho e os controles. */
+@media (min-width: 701px) {
+  .slide {
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .slide-inner {
+    position: absolute;
+    top: calc(var(--safe-top) + (100dvh - var(--safe-top) - var(--safe-bottom)) / 2);
+    left: 50%;
+    min-height: 0;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    transform: translate(-50%, -50%) scale(var(--fit-scale, 1));
+    transform-origin: center center;
+    will-change: transform;
+  }
+}
+
+/* Faixa intermediária: notebooks pequenos ou navegador com zoom acima de 100%. */
+@media (min-width: 701px) and (max-width: 960px) {
+  .topbar {
+    grid-template-columns: 138px minmax(180px, 1fr) 132px;
+    gap: 14px;
+    padding: 0 20px;
+  }
+
+  .brand { width: 132px; }
+  .brand-logo { width: 112px; }
+  .overview-button { padding: 8px 12px; }
+  .slide-inner { width: calc(100% - 56px); }
+  .controls { padding: 0 24px; }
 }
 
 @media (max-width: 520px) {
@@ -1209,20 +1456,24 @@ p { line-height: 1.55; }
           <p class="eyebrow blue">Cultura</p>
           <h2>Nosso jeito de trabalhar</h2>
           <div class="value-grid culture-grid">
-            <article class="value-card">
-              <span class="value-number">01</span><h3>Autodidatas extremos</h3>
+            <article class="value-card culture-card">
+              <div class="culture-card-top"><span class="culture-icon" aria-hidden="true">✦</span><span class="value-number">01</span></div>
+              <h3>Autodidatas extremos</h3>
               <p>Pesquisamos, buscamos soluções e assumimos responsabilidade antes de pedir ajuda.</p>
             </article>
-            <article class="value-card">
-              <span class="value-number">02</span><h3>Sangue Data-Driven</h3>
+            <article class="value-card culture-card">
+              <div class="culture-card-top"><span class="culture-icon" aria-hidden="true">▦</span><span class="value-number">02</span></div>
+              <h3>Sangue Data-Driven</h3>
               <p>Tomamos decisões, testamos e evoluímos com base em dados, indicadores e métricas claras.</p>
             </article>
-            <article class="value-card">
-              <span class="value-number">03</span><h3>Ready, Fire, Aim</h3>
+            <article class="value-card culture-card">
+              <div class="culture-card-top"><span class="culture-icon" aria-hidden="true">◎</span><span class="value-number">03</span></div>
+              <h3>Ready, Fire, Aim</h3>
               <p>Agimos rápido, testamos na prática e ajustamos o caminho com aprendizado contínuo.</p>
             </article>
-            <article class="value-card">
-              <span class="value-number">04</span><h3>Amar o que faz</h3>
+            <article class="value-card culture-card">
+              <div class="culture-card-top"><span class="culture-icon" aria-hidden="true">♥</span><span class="value-number">04</span></div>
+              <h3>Amar o que faz</h3>
               <p>Valorizamos pessoas apaixonadas, autênticas e comprometidas com o que constroem.</p>
             </article>
           </div>
@@ -1312,7 +1563,6 @@ p { line-height: 1.55; }
             <article><span>Dias 2 e 3</span><h3>Área e ferramentas</h3><p>Treinamentos essenciais, processos e primeiras atividades acompanhadas.</p></article>
             <article><span>Dias 4 e 5</span><h3>Prática com suporte</h3><p>Execução inicial, dúvidas com o padrinho e alinhamento com a liderança.</p></article>
           </div>
-          <p class="callout">A agenda detalhada deve ser enviada antes do primeiro dia e ajustada pela liderança da área.</p>
         </div>
       </section>
 
@@ -1436,7 +1686,7 @@ p { line-height: 1.55; }
                 <li><strong>TotalPass</strong><span>Acesso a academias, estúdios e soluções voltadas à saúde e à qualidade de vida.</span></li>
                 <li><strong>Wellhub</strong><span>Opções de atividade física e bem-estar, como academias, mindfulness, nutrição e sono.</span></li>
                 <li><strong>Clude</strong><span>Acesso digital a cuidados de saúde, como telemedicina e orientações online, conforme o plano disponível.</span></li>
-                <li><strong>Day Off</strong><span>Folga oferecida pela GEX para proporcionar um dia de descanso.</span></li>
+                <li><strong>Day Off</strong><span>Folga concedida pela GEX em razão do aniversário do colaborador. Essa é a única regra do benefício.</span></li>
               </ul>
               <a data-link="atualizarDados">Formulário para atualizar seus dados</a>
             </article>
@@ -1488,7 +1738,7 @@ window.GEX_ONBOARDING = {
   links: {
     discord: "https://discord.com/login",
     gather: "https://app.v2.gather.town/app/cleitons-x-2d1ad6ed-45cc-49c0-8049-8bf4660ac182/join",
-    invoiceModelo: "https://docs.google.com/document/d/1huijbqXeXTGRHh7n4gfuskU8EdfQpbI3OSseFYJebnM/edit?usp=sharing",
+    invoiceModelo: "https://docs.google.com/document/d/1S_soKbwcEy1pVjqmNA0qEm9yghSo_cYHTNGPUz280OM/edit?tab=t.0",
     invoiceFormulario: "https://docs.google.com/forms/d/e/1FAIpQLSdH5hWTbKcBNdMy2s-JHpJ6i0S922alvOq7jo20gkinI3E9WA/viewform",
     atualizarDados: "https://docs.google.com/forms/d/e/1FAIpQLSeO8LVl24UeawJZI_sAPD2PNXsEJ-ijRa92zTDIZtVhxT3UXQ/viewform",
   },
@@ -1513,7 +1763,10 @@ window.GEX_ONBOARDING = {
   const nextButton = document.getElementById("nextButton");
   const overview = document.getElementById("overview");
   const overviewGrid = document.getElementById("overviewGrid");
+  const topbar = document.querySelector(".topbar");
+  const controls = document.querySelector(".controls");
   let current = 0;
+  let fitFrame = 0;
 
   const getInitials = (value, fallback) => {
     const words = String(value || "").trim().split(/\s+/).filter(Boolean);
@@ -1555,6 +1808,32 @@ window.GEX_ONBOARDING = {
     }
   });
 
+  const fitSlidesToViewport = () => {
+    const desktopFit = window.innerWidth > 700;
+    const topHeight = topbar?.offsetHeight || 0;
+    const bottomHeight = controls?.offsetHeight || 0;
+    const availableHeight = Math.max(1, window.innerHeight - topHeight - bottomHeight - 28);
+    const availableWidth = Math.max(1, window.innerWidth - 48);
+
+    slides.forEach((slide) => {
+      const inner = slide.querySelector(".slide-inner");
+      if (!inner) return;
+
+      inner.style.setProperty("--fit-scale", "1");
+      if (!desktopFit) return;
+
+      const naturalHeight = Math.max(inner.scrollHeight, inner.offsetHeight, 1);
+      const naturalWidth = Math.max(inner.scrollWidth, inner.offsetWidth, 1);
+      const scale = Math.min(1, availableHeight / naturalHeight, availableWidth / naturalWidth);
+      inner.style.setProperty("--fit-scale", scale.toFixed(4));
+    });
+  };
+
+  const queueFit = () => {
+    cancelAnimationFrame(fitFrame);
+    fitFrame = requestAnimationFrame(fitSlidesToViewport);
+  };
+
   const update = (nextIndex, pushHash = true) => {
     current = Math.max(0, Math.min(slides.length - 1, nextIndex));
     slides.forEach((slide, index) => {
@@ -1569,6 +1848,7 @@ window.GEX_ONBOARDING = {
     prevButton.disabled = current === 0;
     nextButton.disabled = current === slides.length - 1;
     if (pushHash) history.replaceState(null, "", `#${current + 1}`);
+    queueFit();
   };
 
   const go = (delta) => update(current + delta);
@@ -1620,6 +1900,9 @@ window.GEX_ONBOARDING = {
   }, { passive: true });
 
   const hashIndex = Number(location.hash.replace("#", "")) - 1;
+  window.addEventListener("resize", queueFit, { passive: true });
+  window.visualViewport?.addEventListener("resize", queueFit, { passive: true });
+  document.fonts?.ready.then(queueFit);
   update(Number.isFinite(hashIndex) && hashIndex >= 0 ? hashIndex : 0, false);
 })();
 
