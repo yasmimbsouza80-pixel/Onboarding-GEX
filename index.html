@@ -396,14 +396,13 @@ p { line-height: 1.55; }
    deixando o s&#237;mbolo de fundo mais livre. */
 .cover-slide .cover-grid {
   position: relative;
-  padding-bottom: 130px;
 }
 
 .cover-slide .cover-note {
   position: absolute;
   z-index: 3;
   right: max(-260px, calc((100% - 100vw) / 2 + 56px));
-  bottom: 0;
+  bottom: -120px;
   width: min(350px, 36vw);
   max-width: calc(100% - 40px);
 }
@@ -853,6 +852,7 @@ p { line-height: 1.55; }
 .leadership-overview .leadership-grid::before {
   content: "DIRETORIA";
   grid-column: 1 / -1;
+  text-align: center;
   color: var(--blue);
   font-size: 13px;
   font-weight: 900;
@@ -873,7 +873,13 @@ p { line-height: 1.55; }
 
 .leadership-overview .leader-card:nth-child(-n + 2) {
   grid-column: span 3;
+  width: min(100%, 440px);
+  min-height: 94px;
+  padding: 8px;
 }
+
+.leadership-overview .leader-card:nth-child(1) { justify-self: end; }
+.leadership-overview .leader-card:nth-child(2) { justify-self: start; }
 
 .leadership-overview .leader-card:nth-child(n + 3) {
   grid-column: span 2;
@@ -1398,6 +1404,7 @@ p { line-height: 1.55; }
   .hero-text { font-size: clamp(20px, 2vw, 27px); }
   .identity-card { margin-top: 16px; }
   .cover-note { padding: 20px 22px; }
+  .cover-slide .cover-note { bottom: -70px; }
 
   .eyebrow { margin-bottom: 10px; }
   .lead { margin-bottom: 18px; }
@@ -1479,6 +1486,7 @@ p { line-height: 1.55; }
   p { line-height: 1.4; }
 
   .hero-text { font-size: clamp(17px, 1.7vw, 22px); }
+  .cover-slide .cover-note { bottom: -28px; }
   .eyebrow { margin-bottom: 7px; }
   .lead { margin-bottom: 12px; }
 
@@ -1602,6 +1610,8 @@ p { line-height: 1.55; }
   .leadership-overview .leader-card:nth-child(n) {
     grid-column: auto;
     margin-top: 0;
+    width: 100%;
+    justify-self: stretch;
   }
   .leadership-overview .leader-card:nth-child(3) { margin-top: 32px; }
 
